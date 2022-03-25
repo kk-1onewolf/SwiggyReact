@@ -4,7 +4,7 @@ import TabOption from './TabOption';
 import options from "./header.option"
 function optionHelper(option)
 {
-    <TabOption key={option.id} name={option.name}/> 
+    return <TabOption key={option.id} name={option.name}/> 
 }
 function Header() {
     return (<div className='header'>
