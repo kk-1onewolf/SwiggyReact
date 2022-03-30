@@ -2,3 +2,11 @@
     width: 150px;
     height: 100px;
   }
+  .cart {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding-left: 150px;
+   
+  }
+  
