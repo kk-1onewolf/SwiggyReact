@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./RestroPageBanner.css";
-import image from "./Constants/restropagebanner.image.js"
+import image from "./constants/restropagebanner.image.js"
 function RestroPageBanner () {
     return (
       <div class="restro-page-banner">

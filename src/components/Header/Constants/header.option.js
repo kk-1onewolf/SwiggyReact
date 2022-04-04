@@ -1,4 +1,4 @@
-const options=[
+const OPTIONS=[
     {
         id:1,
         name:"Search"
@@ -16,4 +16,4 @@ const options=[
         name:"Cart"
     }
 ]
-export default options;
+export default OPTIONS;

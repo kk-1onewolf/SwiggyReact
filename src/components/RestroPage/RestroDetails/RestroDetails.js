@@ -1,62 +1,29 @@
 import React, { Component } from "react";
+// import {defaultMemoize} from 'reselect'
 import "./RestroDetails.css"
-import list from "./constants/details.list"
+import listOfDishes from "./constants/restroDetails.list"
 import Menu from "./Menu"
+import {handleHelper} from './handleHelper'
+const ENUM={
+  DISH_LIST:listOfDishes
+}
  class RestroDetails extends Component {
   
     constructor(){
         super();
+        this.handleClick=this.handleClick.bind(this);
+        this.cartRender=this.cartRender.bind(this);
         this.state=
         {
             cart: [],
-            dishList: list
+            dishList: ENUM.DISH_LIST
         }
     }
-  updateDishInCart(detailCopy){
-   
-    return (current)=>{
-      if(current.name === detailCopy.name)
-      {
-        current.quantity=current.quantity+1;
-      }
-    }
-     
-    
-  }
   
-  isPresentInCart(detail,isInCart){
-      return (dish)=>{
-        if(detail.name===dish.name){
-            isInCart.isTrue=1;
-        }
-      }
-  }
-  handleClickLogic(detail,newCart){
-   
-    let detailCopy={...detail};
-    let isInCart={
-      isTrue:0
-    };
-    newCart.map(this.isPresentInCart(detail,isInCart));
-    console.log(isInCart);
-    if(isInCart.isTrue===0)
-    {
-     detailCopy.quantity=1;
-     newCart.push(detailCopy);
-    }
-    else
-   {
-      newCart.map(this.updateDishInCart(detailCopy));
-   }
-    
-  }
-
-
   handleClick(detail)
   {
-    let newCart=[...(this.state.cart)];
-
-    this.handleClickLogic(detail,newCart);
+    console.log(this.findDishById);
+    let newCart=handleHelper.handleClickHepler(detail,this.state.cart);
     
     this.setState({
       cart:newCart
@@ -64,39 +31,37 @@ import Menu from "./Menu"
 
   }
   
-  
-  cartInit(dish){
+  cartRender(dish)
+  {
+    
+    let cartDish=((ENUM.DISH_LIST).find(handleHelper.findDishById(dish)));
+    console.log(cartDish);
     return (
       <div>
         <br/>
-        <li>{`${dish.quantity}  ${dish.name}`}</li>
-        <h4>Subtotal</h4>  {`Rs. ${dish.price*dish.quantity}`}
+        <li>{`${dish.quantity}  ${cartDish.details.name}`}</li>
+        <h4>Subtotal</h4>  {`Rs. ${cartDish.details.price*dish.quantity}`}
 
       </div>
     
       );
   }
-  calculateTotal(){
-    let total=0;
-    this.state.cart.map((dishes)=>{
-      total += dishes.price*dishes.quantity;
-    });
-    return total;
-  }
+  
+  
   render() {
-    
-    let total = this.calculateTotal();
+    // defaultMemoize(this.calculateTotal)
+    let total = handleHelper.calculateTotal(this.state.cart);
     return (
 
       <div className="restrolists-main">
 
-          <Menu dishList={list} handleClick={this.handleClick.bind(this)}/>
+          <Menu dishList={ENUM.DISH_LIST} handleClick={this.handleClick}/>
 
      <div className="cart">
       <h1>Cart</h1>
       <p>{this.state.cart.length} Item</p>
       <ul>
-        {this.state.cart.map(this.cartInit)}
+        {this.state.cart.map(this.cartRender)}
       </ul>
       <h2 className="Total">
         Total

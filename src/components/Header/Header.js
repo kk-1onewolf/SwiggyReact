@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Header.css'
 import TabOption from './TabOption';
-import options from "./Constants/header.option"
+import OPTIONS from "./constants/header.option"
 function optionHelper(option)
 {
     return (<TabOption key={option.id} name={option.name}/> )
@@ -18,7 +18,7 @@ function Header() {
            </div>
         </div>
     <div className='tab_options'>
-      {options.map(optionHelper)}
+      {OPTIONS.map(optionHelper)}
      
     </div>
     </div>);
