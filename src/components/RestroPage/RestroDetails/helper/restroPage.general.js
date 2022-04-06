@@ -1,5 +1,5 @@
 import React,{Components} from 'react';
-import DISH_LIST from "./constants/restroDetails.list"
+import DISH_LIST from "../constants/restroDetails.list"
 
  function updateDishInCart(dishDetailCopy){
    

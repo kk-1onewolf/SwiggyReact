@@ -1,17 +1,18 @@
 import React,{ Component } from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import Button from './Button';
+import TablePaginationActions from '@material-ui/core/TablePagination/TablePaginationActions';
 TablePaginationActions.defaultProps={
   dishList:[],
-  handleClick:{}
+  getUpdatedCartValue:()=>{}
 }
 TablePaginationActions.propTypes={
   dishList:propTypes.array,
-  handleClick:propTypes.func
+  getUpdatedCartValue:propTypes.func
 }
 function Menu(props){
 
-    let {dishList,handleClick}=props;
+    let {dishList,getUpdatedCartValue}=props;
     
     return ( 
         <div>
@@ -24,7 +25,7 @@ function Menu(props){
             <p>{dish.details.description}</p>
             <img className="image-here"  src={dish.details.image}/>
             </div>
-            <Button dish={dish} handleClick={handleClick}/>
+            <Button dish={dish} getUpdatedCartValue={getUpdatedCartValue}/>
           </div>
 
         );

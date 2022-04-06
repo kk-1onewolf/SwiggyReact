@@ -3,13 +3,13 @@ import React, { Component } from "react";
 import "./RestroDetails.css"
 import DISH_LIST from "./constants/restroDetails.list"
 import Menu from "./Menu"
-import {handleClickHepler,findDishById,calculateTotal} from './handleHelper'
+import {handleClickHepler,findDishById,calculateTotal} from './helper/restroPage.general'
 
  class RestroDetails extends Component {
   
     constructor(){
         super();
-        this.handleClick=this.handleClick.bind(this);
+        this.getUpdatedCartValue=this.getUpdatedCartValue.bind(this);
         this.cartRender=this.cartRender.bind(this);
         this.state=
         {
@@ -18,9 +18,9 @@ import {handleClickHepler,findDishById,calculateTotal} from './handleHelper'
         }
     }
   
-  handleClick(detail)
+  getUpdatedCartValue(detail)
   {
-    console.log(this.findDishById);
+   
     let newCart=handleClickHepler(detail,this.state.cart);
     
     this.setState({
@@ -33,7 +33,7 @@ import {handleClickHepler,findDishById,calculateTotal} from './handleHelper'
   {
     
     let cartDish=((DISH_LIST).find(findDishById(dish)));
-    console.log(cartDish);
+   
     return (
       <div>
         <br/>
@@ -53,7 +53,7 @@ import {handleClickHepler,findDishById,calculateTotal} from './handleHelper'
 
       <div className="restrolists-main">
 
-          <Menu dishList={DISH_LIST} handleClick={this.handleClick}/>
+          <Menu dishList={DISH_LIST} getUpdatedCartValue={this.getUpdatedCartValue}/>
 
      <div className="cart">
       <h1>Cart</h1>

@@ -7,9 +7,9 @@ class Button extends Component{
 
     }
     handleButtonClick=()=>{
-        const {dish,handleClick}=this.props;
+        const {dish,getUpdatedCartValue}=this.props;
         
-        return handleClick(dish.details);
+        return getUpdatedCartValue(dish.details);
     }
     render(){
         return(
