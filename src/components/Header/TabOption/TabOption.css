@@ -1,0 +1,25 @@
+.tab_option
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+}
+.tab_icon
+{
+   padding: 15px 5px;
+   margin-top: 10px;
+}
+.tab_name
+{
+    padding: 15px 10px;
+}
+.tab_options
+{
+    display: flex;
+}
+.App {
+    text-align: center;
+  }
+  
+  
