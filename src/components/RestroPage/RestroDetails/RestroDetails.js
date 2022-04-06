@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 // import {defaultMemoize} from 'reselect'
 import "./RestroDetails.css"
-import listOfDishes from "./constants/restroDetails.list"
+import DISH_LIST from "./constants/restroDetails.list"
 import Menu from "./Menu"
-import {handleHelper} from './handleHelper'
-const ENUM={
-  DISH_LIST:listOfDishes
-}
+import {handleClickHepler,findDishById,calculateTotal} from './handleHelper'
+
  class RestroDetails extends Component {
   
     constructor(){
@@ -16,14 +14,14 @@ const ENUM={
         this.state=
         {
             cart: [],
-            dishList: ENUM.DISH_LIST
+            dishList: DISH_LIST
         }
     }
   
   handleClick(detail)
   {
     console.log(this.findDishById);
-    let newCart=handleHelper.handleClickHepler(detail,this.state.cart);
+    let newCart=handleClickHepler(detail,this.state.cart);
     
     this.setState({
       cart:newCart
@@ -34,7 +32,7 @@ const ENUM={
   cartRender(dish)
   {
     
-    let cartDish=((ENUM.DISH_LIST).find(handleHelper.findDishById(dish)));
+    let cartDish=((DISH_LIST).find(findDishById(dish)));
     console.log(cartDish);
     return (
       <div>
@@ -49,13 +47,13 @@ const ENUM={
   
   
   render() {
-    // defaultMemoize(this.calculateTotal)
-    let total = handleHelper.calculateTotal(this.state.cart);
+    
+    let total = calculateTotal(this.state.cart);
     return (
 
       <div className="restrolists-main">
 
-          <Menu dishList={ENUM.DISH_LIST} handleClick={this.handleClick}/>
+          <Menu dishList={DISH_LIST} handleClick={this.handleClick}/>
 
      <div className="cart">
       <h1>Cart</h1>

@@ -1,59 +1,58 @@
 import React,{Components} from 'react';
-import listOfDishes from "./constants/restroDetails.list"
-const handleHelper={
- updateDishInCart(detailCopy){
+import DISH_LIST from "./constants/restroDetails.list"
+
+ function updateDishInCart(dishDetailCopy){
    
     return (current)=>{
-      if(current.id === detailCopy.id)
+      if(current.id === dishDetailCopy.id)
       {
         current.quantity=current.quantity+1;
       }
     }
-  },
+  }
   
-  findDish(detail){
+  function findDish(detailOfDish){
     
     return (dish)=>{
-        return  dish.id===detail.id
+        return  dish.id===detailOfDish.id
     }
     
-  },
-  handleClickHepler(detail,cart){
+  }
+  function handleClickHepler(detailOfDish,cart){
     let newCart=[...(cart)];
-    let detailCopy={
-      quantity:0,
-      id:detail.id    
+    let dishDetailCopy={
+      id : detailOfDish.id    
     };
     
-    let isInCart=(newCart.find(this.findDish(detail)));
+    let isInCart=(newCart.find(findDish(detailOfDish)));
     
     if(isInCart===undefined)
     {
-     detailCopy.quantity=1;
-     newCart.push(detailCopy);
+     dishDetailCopy.quantity=1;
+     newCart.push(dishDetailCopy);
     }
     else
    {
-      newCart.forEach(this.updateDishInCart(detailCopy));
+      newCart.forEach(updateDishInCart(dishDetailCopy));
    }
    return newCart;
     
-  },
-  calculateTotal(cart){
+  }
+  function calculateTotal(cart){
     let total=0;
     
-   cart.forEach((dish)=>{
-      let cartDish=((listOfDishes).find(this.findDishById(dish)));
-      total += cartDish.details.price*dish.quantity;
+   cart.forEach((cartItem)=>{
+      let cartDish=((DISH_LIST).find(findDishById(cartItem)));
+      total += cartDish.details.price*cartItem.quantity;
     });
     return total;
-  },
-  findDishById(dish){
+  }
+  function findDishById(dish){
 
     return (dishInList)=>
     {
         return (dishInList.id===dish.id);
     }
   }
-}
-  export {handleHelper};
+
+  export {handleClickHepler,findDishById,calculateTotal};

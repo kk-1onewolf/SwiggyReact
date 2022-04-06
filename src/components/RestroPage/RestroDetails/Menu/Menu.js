@@ -1,6 +1,14 @@
 import React,{ Component } from 'react';
+import { propTypes } from 'react-bootstrap/esm/Image';
 import Button from './Button';
-
+TablePaginationActions.defaultProps={
+  dishList:[],
+  handleClick:{}
+}
+TablePaginationActions.propTypes={
+  dishList:propTypes.array,
+  handleClick:propTypes.func
+}
 function Menu(props){
 
     let {dishList,handleClick}=props;
