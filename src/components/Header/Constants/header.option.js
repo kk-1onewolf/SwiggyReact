@@ -9,7 +9,7 @@ const OPTIONS=[
     },
     {
         id:3,
-        name:"Sign In"
+        name:"SignIn"
     },
     {
         id:4,

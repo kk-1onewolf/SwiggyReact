@@ -2,6 +2,8 @@ import TablePaginationActions from '@material-ui/core/TablePagination/TablePagin
 import React, { Component } from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import './TabOption.css';
+import { Link } from 'react-router-dom'
+
 TablePaginationActions.defaultProps={
    name:""
 }
@@ -11,7 +13,10 @@ TablePaginationActions.propTypes={
 function  TabOption(props){
   let {name}=props
   return <div className='tab_option'>
-        <div className='tab_name'>{name}</div>
+        
+        <Link to={`/${name}`}>
+         <div className='tab_name'>{name}</div>
+          </Link>
     </div>;
 }
 export default TabOption;

@@ -4,7 +4,7 @@ import "./RestroDetails.css"
 import DISH_LIST from "./constants/restroDetails.list"
 import Menu from "./Menu"
 import {handleClickHepler,findDishById,calculateTotal} from './helper/restroPage.general'
-
+import { Link } from 'react-router-dom'
  class RestroDetails extends Component {
   
     constructor(){
@@ -65,6 +65,9 @@ import {handleClickHepler,findDishById,calculateTotal} from './helper/restroPage
         Total
       </h2>
       <p> {"Rs "+total}</p>
+      <Link to='/ThankYou'>
+      <button>Buy</button>
+      </Link>
      </div>
    </div>
    
