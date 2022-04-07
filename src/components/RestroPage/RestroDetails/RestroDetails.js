@@ -65,7 +65,7 @@ import { Link } from 'react-router-dom'
         Total
       </h2>
       <p> {"Rs "+total}</p>
-      <Link to='/ThankYou'>
+      <Link to='/thank-you'>
       <button>Buy</button>
       </Link>
      </div>
