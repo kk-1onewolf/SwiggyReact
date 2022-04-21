@@ -5,6 +5,8 @@ import DISH_LIST from "./constants/restroDetails.list"
 import Menu from "./Menu"
 import {handleClickHepler,findDishById,calculateTotal} from './helper/restroPage.general'
 import { Link } from 'react-router-dom'
+import {getDishes} from "./helper/restropage.data"
+
  class RestroDetails extends Component {
   
     constructor(){
@@ -14,10 +16,24 @@ import { Link } from 'react-router-dom'
         this.state=
         {
             cart: [],
-            dishList: DISH_LIST
+           
         }
     }
   
+   componentDidMount(){
+
+     getDishes().then(
+       (response)=>{
+        console.log(response);
+        this.setState(
+          {
+            dishList:response
+          }
+        )
+       }
+       
+     )
+   }
   getUpdatedCartValue(detail)
   {
    
@@ -49,10 +65,12 @@ import { Link } from 'react-router-dom'
   render() {
     
     let total = calculateTotal(this.state.cart);
+  
     return (
 
       <div className="restrolists-main">
-
+          
+        
           <Menu dishList={DISH_LIST} getUpdatedCartValue={this.getUpdatedCartValue}/>
 
      <div className="cart">
