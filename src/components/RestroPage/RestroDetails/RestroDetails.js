@@ -5,7 +5,7 @@ import DISH_LIST from "./constants/restroDetails.list"
 import Menu from "./Menu"
 import {handleClickHepler,findDishById,calculateTotal} from './helper/restroPage.general'
 import { Link } from 'react-router-dom'
-import {getDishes} from "./helper/restropage.data"
+import {getDishes} from "./helper/restroDetails.data"
 
  class RestroDetails extends Component {
   

@@ -1,8 +1,8 @@
 import {combineReducers} from "redux";
-import {buyItemReducer} from "./productReducers";
+import {updateCategoryReducer} from "./productReducers";
 
  const reducers = combineReducers({
-    buyDish:buyItemReducer,
+  updateCategory:updateCategoryReducer,
     
   });
   export default reducers;

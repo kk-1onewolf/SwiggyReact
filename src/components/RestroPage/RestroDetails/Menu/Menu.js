@@ -1,62 +1,49 @@
 import React,{ Component } from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
-import Button from './Button';
-import TablePaginationActions from '@material-ui/core/TablePagination/TablePaginationActions';
-import { indian,chinese,italian } from '../../../../redux/action/productAction';
+import AddDishButton from './AddDishButton';
+import { changeSelectedCategory } from '../../../../redux/action/productAction';
 import {useSelector,useDispatch} from  "react-redux"
-TablePaginationActions.defaultProps={
+Menu.defaultProps={
   dishList:[],
   getUpdatedCartValue:()=>{}
 }
-TablePaginationActions.propTypes={
+Menu.propTypes={
   dishList:propTypes.array,
   getUpdatedCartValue:propTypes.func
 }
-function fetchChinese(dispatch){
+
+function changeCategory(dispatch,payload){
 
   return ()=>{
-    dispatch(chinese())
-  }
-  
-}
-function fetchIndian(dispatch){
-
-  return ()=>{
-    dispatch(indian())
-  }
-  
-}
-function fetchItalian(dispatch){
-
-  return ()=>{
-    dispatch(italian())
+    dispatch(changeSelectedCategory(payload))
   }
   
 }
 function Menu(props){
-  const myState= useSelector((state)=> state.buyDish.categorySelected)
+  const currentCategory= useSelector((state)=> state.updateCategory.categorySelected)
   
    const dispatch= useDispatch();
    
     let {dishList,getUpdatedCartValue}=props;
-    
-    
+    let categoryBasedMenu=dishList.find((dish)=>{
+                
+      return dish.details.category===currentCategory;
+   
+ 
+    })
+   
     return ( 
        <div className="restrolists">
         <div className="restrolists-left">
           Categories:
           <div className="recommendation">
-            <div onClick={fetchIndian(dispatch)}>Indian</div>
-            <div onClick={fetchChinese(dispatch)}> Chinese </div>
-            <div onClick={fetchItalian(dispatch)}>Italian</div>
+            <div onClick={changeCategory(dispatch,"indian")}>Indian</div>
+            <div onClick={changeCategory(dispatch,"chinese")}> Chinese </div>
+            <div onClick={changeCategory(dispatch,"italian")}>Italian</div>
           </div>
         </div>
         
-        <div>
-             {dishList.map((dish) => {
-               console.log(myState);
-              
-            if(dish.details.category===myState){
+        <div>{categoryBasedMenu.map((dish) => {
            return (
           <div className="restrodetaillist">
             <div className="restrodetaillist-info">
@@ -65,13 +52,9 @@ function Menu(props){
             <p>{dish.details.description}</p>
             <img className="image-here"  src={dish.details.image}/>
             </div>
-            <Button dish={dish} getUpdatedCartValue={getUpdatedCartValue}/>
+            <AddDishButton dish={dish} getUpdatedCartValue={getUpdatedCartValue}/>
           </div>);
-            }
           }
-        
-         
-         
        )
       }
       </div>

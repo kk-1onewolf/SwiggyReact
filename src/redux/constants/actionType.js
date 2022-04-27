@@ -1,3 +1,6 @@
-const BUY_DISH="BUY_DISH"
 
-export default BUY_DISH;
+const actionType={
+  
+    CHANGE_SELECTED_CATEGORY:"changeSelectedCategory"
+}
+export default actionType;

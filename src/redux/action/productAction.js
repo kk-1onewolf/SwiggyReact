@@ -1,4 +1,4 @@
-//import { actionType } from "../constants/actionType";
+
 import BUY_DISH from "../constants/actionType";
 export function buyItem(){
     return {
@@ -6,22 +6,10 @@ export function buyItem(){
      payload: "Thank You for Ordering on Replica Swiggy"
     };
 }
-export function indian(){
+export function changeSelectedCategory(category){
     return {
-     type:"indian",
-     payload: "indian"
-    };
-}
-export function chinese(){
-    return {
-     type:"chinese",
-     payload: "chinese"
-    };
-}
-export function italian(){
-    return {
-     type:"italian",
-     payload: "italian"
-    };
+        type:"changeSelectedCategory",
+        payload:category
+    }
 }
 

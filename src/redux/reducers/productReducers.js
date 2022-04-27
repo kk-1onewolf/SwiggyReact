@@ -1,18 +1,13 @@
-import BUY_DISH from "../constants/actionType"
+import actionType from "../constants/actionType"
+
 const initialState = {
-  value: "Initial",
+ 
   categorySelected:"indian"
 };
-export const buyItemReducer=(state=initialState,action)=>{
+export const updateCategoryReducer=(state=initialState,action)=>{
     switch (action.type) {
-        case BUY_DISH:
-          return { ...state, value: action.payload};
-        case "indian":
+        case actionType.CHANGE_SELECTED_CATEGORY:
           return {...state,categorySelected:action.payload};
-        case "chinese":
-            return {...state,categorySelected:action.payload};
-        case "italian":
-              return {...state,categorySelected:action.payload};
         default:
           return state;
       }
