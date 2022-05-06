@@ -1,22 +1,49 @@
 import React,{ Component } from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
-import Button from './Button';
-import TablePaginationActions from '@material-ui/core/TablePagination/TablePaginationActions';
-TablePaginationActions.defaultProps={
+import AddDishButton from './AddDishButton';
+import { changeSelectedCategory } from '../../../../redux/action/productAction';
+import {useSelector,useDispatch} from  "react-redux"
+Menu.defaultProps={
   dishList:[],
   getUpdatedCartValue:()=>{}
 }
-TablePaginationActions.propTypes={
+Menu.propTypes={
   dishList:propTypes.array,
   getUpdatedCartValue:propTypes.func
 }
-function Menu(props){
 
+function changeCategory(dispatch,payload){
+
+  return ()=>{
+    dispatch(changeSelectedCategory(payload))
+  }
+  
+}
+function Menu(props){
+  const currentCategory= useSelector((state)=> state.updateCategory.categorySelected)
+  
+   const dispatch= useDispatch();
+   
     let {dishList,getUpdatedCartValue}=props;
-    
+    let categoryBasedMenu=dishList.find((dish)=>{
+                
+      return dish.details.category===currentCategory;
+   
+ 
+    })
+   
     return ( 
-        <div>
-             {dishList.map((dish) => {
+       <div className="restrolists">
+        <div className="restrolists-left">
+          Categories:
+          <div className="recommendation">
+            <div onClick={changeCategory(dispatch,"indian")}>Indian</div>
+            <div onClick={changeCategory(dispatch,"chinese")}> Chinese </div>
+            <div onClick={changeCategory(dispatch,"italian")}>Italian</div>
+          </div>
+        </div>
+        
+        <div>{categoryBasedMenu.map((dish) => {
            return (
           <div className="restrodetaillist">
             <div className="restrodetaillist-info">
@@ -25,14 +52,16 @@ function Menu(props){
             <p>{dish.details.description}</p>
             <img className="image-here"  src={dish.details.image}/>
             </div>
-            <Button dish={dish} getUpdatedCartValue={getUpdatedCartValue}/>
-          </div>
+            <AddDishButton dish={dish} getUpdatedCartValue={getUpdatedCartValue}/>
+          </div>);
+          }
+       )
+      }
+      </div>
+    </div>
+    )
+  }
+      
 
-        );
-      })
-}
-        </div>
-       );
-}
 
 export default Menu 

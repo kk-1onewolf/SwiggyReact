@@ -4,6 +4,8 @@ import "./RestroDetails.css"
 import DISH_LIST from "./constants/restroDetails.list"
 import Menu from "./Menu"
 import {handleClickHepler,findDishById,calculateTotal} from './helper/restroPage.general'
+import { Link } from 'react-router-dom'
+import {getDishes} from "./helper/restroDetails.data"
 
  class RestroDetails extends Component {
   
@@ -14,10 +16,24 @@ import {handleClickHepler,findDishById,calculateTotal} from './helper/restroPage
         this.state=
         {
             cart: [],
-            dishList: DISH_LIST
+           
         }
     }
   
+   componentDidMount(){
+
+     getDishes().then(
+       (response)=>{
+        console.log(response);
+        this.setState(
+          {
+            dishList:response
+          }
+        )
+       }
+       
+     )
+   }
   getUpdatedCartValue(detail)
   {
    
@@ -49,10 +65,12 @@ import {handleClickHepler,findDishById,calculateTotal} from './helper/restroPage
   render() {
     
     let total = calculateTotal(this.state.cart);
+  
     return (
 
       <div className="restrolists-main">
-
+          
+        
           <Menu dishList={DISH_LIST} getUpdatedCartValue={this.getUpdatedCartValue}/>
 
      <div className="cart">
@@ -65,6 +83,9 @@ import {handleClickHepler,findDishById,calculateTotal} from './helper/restroPage
         Total
       </h2>
       <p> {"Rs "+total}</p>
+      <Link to='/thank-you'>
+      <button>Buy</button>
+      </Link>
      </div>
    </div>
    
